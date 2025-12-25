@@ -6,30 +6,12 @@ This project is an introductory Spring Boot application designed to demonstrate 
 
 ## Technologies Used
 
-* 
-**Java 17+** 
-
-
-* 
-**Spring Boot** (latest stable version) 
-
-
-* 
-**Maven** (Project Builder) 
-
-
-* 
-**Spring Web**: For handling HTTP requests.
-
-
-* 
-**Lombok**: To reduce boilerplate code.
-
-
-* 
-**Thymeleaf**: Server-side Java template engine for rendering HTML views.
-
-
+* **Java 17+** 
+* **Spring Boot** (latest stable version) 
+* **Maven** (Project Builder) 
+* **Spring Web**: For handling HTTP requests.
+* **Lombok**: To reduce boilerplate code.
+* **Thymeleaf**: Server-side Java template engine for rendering HTML views.
 
 ## Project Structure and Setup
 
