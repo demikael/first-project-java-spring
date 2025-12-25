@@ -1,143 +1,126 @@
-# Task 1 – Spring Boot MVC Application
+# Task 1: First Spring Boot Application
 
-## Project Description
+## Project Overview
 
-This project is a simple **Spring Boot MVC application** created as part of **Task 1**.
-The goal of the application is to demonstrate:
-
-* creation of a Spring Boot project from scratch,
-* usage of a Spring Controller,
-* handling HTTP GET requests,
-* returning plain text using `@ResponseBody`,
-* returning an HTML view using the MVC pattern with **Thymeleaf**.
-
-The application runs on an embedded Tomcat server and is accessible via a web browser.
-
----
+This project is an introductory Spring Boot application designed to demonstrate the basic setup of a web project, the creation of REST controllers, and the rendering of HTML views using the MVC (Model-View-Controller) pattern.
 
 ## Technologies Used
 
-* Java
-* Spring Boot
-* Spring Web
-* Thymeleaf
-* Maven
+* 
+**Java 17+** 
+
+
+* 
+**Spring Boot** (latest stable version) 
+
+
+* 
+**Maven** (Project Builder) 
+
+
+* 
+**Spring Web**: For handling HTTP requests.
+
+
+* 
+**Lombok**: To reduce boilerplate code.
+
+
+* 
+**Thymeleaf**: Server-side Java template engine for rendering HTML views.
+
+
+
+## Project Structure and Setup
+
+The project was initialized using [Spring Initializr](https://start.spring.io/) with the following metadata:
+
+* **Group**: `pl.edu.vistula`
+* **Artifact**: `first-project-java-spring`
+* **Name**: `First-Project-Java-Spring`
+
+## Implementation Details
+
+### 1. The Hello Controller
+
+The first controller, `HelloController`, was created in the `pl.edu.vistula.firstprojectjavaspring.controller` package. It initially used the `@RestController` annotation to return simple text directly to the HTTP response.
+
+#### Code: HelloController.java
+
+```java
+package pl.edu.vistula.firstprojectjavaspring.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+@Controller
+public class HelloController {
+
+    @GetMapping(value = "/")
+    public String hello() {
+        return "Hello Vistula, in my first Spring controller.";
+    }
+
+    @GetMapping("/greeting")
+    public String greeting(@RequestParam(name="name", required=false, defaultValue="World") String name, Model model) {
+        model.addAttribute("name", name);
+        return "greeting";
+    }
+}
+
+```
+
+
+
+### 2. Rendering an HTML View
+
+To implement the MVC pattern, the controller was updated to use `@Controller`. A `greeting.html` file was created in the resources folder, which displays a personalized message and the Vistula logo (`vistula.png`).
+
+## Screenshots
+
+### Application Startup (Console Output)
+
+Below is the console output showing the Spring Boot application starting successfully on the default port.
+
+![ConsoleOutput](https://github.com/user-attachments/assets/17f63613-76ea-4d84-b4c2-a32855630182)
+
+### First Controller Implementation
+
+A screenshot of the `HelloController.java` class within the IntelliJ IDEA editor.
+
+![RestController](https://github.com/user-attachments/assets/71e11b6e-8d4f-4a48-894a-f40cd9badf82)
+
+### First GET Request
+
+The result of sending a GET request to the root URL (`http://localhost:8080/`).
+
+![Output 1](https://github.com/user-attachments/assets/395079cb-43aa-4a5f-b010-cd38990d158d)
+
+### Rendering the HTML View
+
+The rendered `greeting.html` page, accessed via `http://localhost:8080/greeting?name=Vistula`, showing the dynamic name attribute and the project image.
+
+![Controller](https://github.com/user-attachments/assets/55bc51ed-9b6a-4be6-b84d-cd8090cad387)
+![greeting](https://github.com/user-attachments/assets/3ecb2765-b321-4d69-971b-75d62fd1ae03)
+![Output 2](https://github.com/user-attachments/assets/f6b98461-4e31-4f84-befe-3003c5056968)
+
+### Full Project Code Structure
+
+A look at the project hierarchy, including the `src/main/java` and `src/main/resources` directories.
 
 ---
 
-## Project Structure
+### How to Run
 
-```
-src
- └── main
-     ├── java
-     │   └── com.example.demo
-     │       └── controller
-     │           └── GreetingController.java
-     └── resources
-         ├── templates
-         │   └── greeting.html
-         └── static
-             └── vistula.png
-```
+1. Ensure you have Java 17 or higher installed.
 
----
 
-## Application Endpoints
+2. Import the project as a Maven project into your IDE.
 
-### 1. Root Endpoint – Plain Text Response
 
-**URL**
+3. Run the `FirstProjectJavaSpringApplication.java` class.
 
-```
-GET http://localhost:8080/
-```
 
-**Description**
-
-This endpoint returns a simple text response directly to the browser.
-
-**Implementation details**
-
-* Uses `@GetMapping("/")`
-* Uses `@ResponseBody`
-* Returns a `String` instead of a view
-
-**Expected Output**
-
-```
-Hello Spring Boot
-```
-
----
-
-### 2. Greeting Endpoint – HTML View (MVC)
-
-**URL**
-
-```
-GET http://localhost:8080/greeting
-```
-
-**Description**
-
-This endpoint demonstrates the **MVC pattern**.
-The controller passes data to an HTML view rendered using **Thymeleaf**.
-
-**Implementation details**
-
-* Uses `@Controller`
-* Uses `Model` to pass data
-* Returns the name of the HTML template (`greeting.html`)
-* Thymeleaf displays dynamic content using `${}` syntax
-
-**Expected Output**
-
-* A webpage displaying a greeting message
-* An image loaded from the static resources folder
-
----
-
-## Explanation of Key Annotations
-
-* `@Controller`
-  Marks the class as a Spring MVC controller.
-
-* `@GetMapping`
-  Maps HTTP GET requests to a controller method.
-
-* `@ResponseBody`
-  Indicates that the return value should be written directly to the HTTP response body instead of rendering a view.
-
-* `Model`
-  Used to pass data from the controller to the view layer.
-
----
-
-## How to Run the Application
-
-1. Open the project in IntelliJ IDEA
-2. Make sure Maven dependencies are downloaded (`Reload Project`)
-3. Run the main Spring Boot application class
-4. Open a browser and visit:
-
-   * `http://localhost:8080/`
-   * `http://localhost:8080/greeting`
-
----
-
-## Notes for Assessment
-
-During the presentation, the application can be demonstrated by:
-
-1. Showing the controller code
-2. Explaining the difference between returning text and returning a view
-3. Running the application locally
-4. Accessing endpoints via a browser
-5. Explaining how Thymeleaf integrates with Spring MVC
-
----
-
-## Author
-
-Adam Mikael Bin Aris Abdillah
+4. Open your browser and navigate to `http://localhost:8080`.
